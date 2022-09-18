@@ -44,7 +44,7 @@ class _WelcomeState extends State<Welcome> {
 
               children: [
                 AnimatedTextKit(
-                    animatedTexts:[ScaleAnimatedText('Medico',scalingFactor:0.4,textStyle: GoogleFonts.sacramento(fontSize: 120,color: Colors.white,fontWeight: FontWeight.bold),)]
+                    animatedTexts:[WavyAnimatedText('Medico',textStyle: GoogleFonts.sacramento(fontSize: 120,color: Colors.white,fontWeight: FontWeight.bold),)]
                 ),
               ],
             ),

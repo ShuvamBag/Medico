@@ -6,6 +6,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:svg_icon/svg_icon.dart';
 
 import 'HealthData.dart';
+import 'Reading_news.dart';
+import 'news_api.dart';
+import 'news_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,6 +18,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<NewsApiModel>? newsList;
+  bool isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    getNews().then((value) {
+      setState(() {
+        if (value.isNotEmpty) {
+          newsList = value;
+          isLoading = false;
+        } else {
+          print("List is Empty");
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,6 +170,114 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         child: Text("5678 ",style: GoogleFonts.poppins(fontSize:40,fontWeight: FontWeight.bold),),
                       )
+
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 10,),
+
+              //Articles
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Container(
+                 // height: MediaQuery.of(context).size.height,
+                  //width: 600,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: HexColor("#BFC9FE"),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      
+                      Text("Articles",style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.bold),),
+                      SizedBox(height: 10,),
+                      Container(
+
+                          child: Column(
+                            children: [
+                          isLoading?
+                          Align(
+                          alignment:Alignment.center,
+                            child: Container(
+                              height: 20,
+                              width:  20,
+                              child:  CircularProgressIndicator(),
+                            ),)
+                              :Container(
+                      child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: newsList?.length,
+                    itemBuilder: (context, index) {
+
+
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          elevation: 0,
+                          child: GestureDetector(
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => ReadingNews(
+
+                                  model: newsList![index],
+                                ),
+                              ),
+                            ),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Image.network(newsList![index].imageUrl)
+                                ),
+                                Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+
+                                  child: Container(
+
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        gradient: LinearGradient(colors: [
+                                          Colors.black12.withOpacity(0),
+                                          Colors.black,
+                                        ],
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                        )),
+                                    padding: EdgeInsets.fromLTRB(10, 15, 10, 5),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          newsList![index].title,
+                                          style: GoogleFonts.poppins(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w600)
+                                        ),
+                                        SizedBox(height: 10,)
+                                        ],
+
+                                    ),
+                                  ),
+
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ), );
+
+                    }),
+              )
+                  ],
+                      ),),
 
                     ],
                   ),
