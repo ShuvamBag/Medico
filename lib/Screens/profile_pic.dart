@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfilePic extends StatelessWidget {
   ProfilePic({
@@ -24,7 +23,7 @@ class ProfilePic extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage("assets/images/Profile Image.png"),
+            backgroundImage: AssetImage("assets/profilepic.png"),
           ),
           Positioned(
             right: -16,
@@ -32,10 +31,17 @@ class ProfilePic extends StatelessWidget {
             child: SizedBox(
               height: 46,
               width: 46,
-              child: TextButton(
-                style: flatButtonStyle,
-                onPressed: () {},
-                child: SvgPicture.asset("assets/icons/Camera Icon.svg"),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.blueGrey.shade500,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    "assets/Camera.png",
+                  ),
+                ),
               ),
             ),
           )

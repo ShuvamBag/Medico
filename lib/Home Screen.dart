@@ -19,18 +19,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<NewsApiModel>? newsList;
   bool isLoading = true;
+
   @override
   void initState() {
+    getNews();
     super.initState();
-    getNews().then((value) {
-      setState(() {
-        if (value.isNotEmpty) {
-          newsList = value;
-          isLoading = false;
-        } else {
-          print("List is Empty");
-        }
-      });
+  }
+
+  getNews() async {
+    News news = News();
+    await news.getNews();
+    newsList = news.news;
+    setState(() {
+      isLoading = false;
     });
   }
 
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: HexColor("#DBDEEF"),
       extendBody: true,
       body: SingleChildScrollView(
-        reverse: true,
+        reverse: false,
         child: SafeArea(
           child: Column(
             children: [
@@ -344,13 +345,24 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                                 child: Stack(
                                                   children: [
-                                                    ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(15),
-                                                        child: Image.network(
-                                                            newsList![index]
-                                                                .imageUrl)),
+                                                    newsList![index].imageUrl !=
+                                                            null
+                                                        ? ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15),
+                                                            child: Image.network(
+                                                                newsList![index]
+                                                                    .imageUrl))
+                                                        : ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15),
+                                                            child: Image.asset(
+                                                                "assets/healthcare.jpeg"),
+                                                          ),
                                                     Positioned(
                                                       left: 0,
                                                       right: 0,

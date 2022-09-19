@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:svg_icon/svg_icon.dart';
 
 class ProfileMenu extends StatelessWidget {
   ProfileMenu({
@@ -27,7 +27,7 @@ class ProfileMenu extends StatelessWidget {
         onPressed: press,
         child: Row(
           children: [
-            SvgPicture.asset(
+            SvgIcon(
               icon,
               color: HexColor("#91A0E2"),
               width: 22,

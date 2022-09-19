@@ -16,7 +16,7 @@ class navigationbar extends StatefulWidget {
 }
 
 class _navigationbarState extends State<navigationbar> {
-  int index = 2;
+  int myindex = 2;
   final screens = [
     MedicalStore(),
     BookAmbulance(),
@@ -28,14 +28,14 @@ class _navigationbarState extends State<navigationbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[index],
+      body: screens[myindex],
       backgroundColor: HexColor("#DBDEEF"),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: HexColor("#DBDEEF"),
         color: HexColor("#91A0E2"),
         animationDuration: Duration(milliseconds: 300),
         height: 75,
-        index: index,
+        index: myindex,
         items: [
           Icon(Icons.add_business_outlined),
           Icon(Icons.fire_truck_rounded),
@@ -43,6 +43,13 @@ class _navigationbarState extends State<navigationbar> {
           Icon(Icons.medical_services_outlined),
           Icon(Icons.account_circle_rounded),
         ],
+        onTap: (index) {
+          setState(() {
+            myindex = index;
+          });
+
+          //Handle button tap
+        },
       ),
     );
   }
