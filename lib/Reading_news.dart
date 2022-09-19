@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
-import 'news_model.dart';
+import 'package:hexcolor/hexcolor.dart';
+
 import 'news_model.dart';
 
 class ReadingNews extends StatelessWidget {
   final NewsApiModel model;
 
-  const ReadingNews( {required this.model, Key? key}) : super(key: key);
+  const ReadingNews({required this.model, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey.shade900,
-        body:
-        SingleChildScrollView(
+        backgroundColor: HexColor("#3A55CB"),
+        body: SingleChildScrollView(
           reverse: true,
           child: Container(
             margin: EdgeInsets.fromLTRB(24, 7, 24, 0),
             child: SingleChildScrollView(
               child: Column(
-
                 children: [
-
-
                   Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(
@@ -67,7 +64,7 @@ class ReadingNews extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                       ),
-                    ),
+                          ),
                   ),
                   Container(
                     width: size.width / 1.05,

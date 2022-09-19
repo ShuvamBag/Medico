@@ -1,8 +1,6 @@
-import 'package:ambulance_finder/Login%20Screen.dart';
 import 'package:ambulance_finder/Welcome_Screen.dart';
-
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,3 +21,16 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+/*class AuthenticationWrapper extends StatelessWidget {
+  const AuthenticationWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+    if (firebaseUser != null) {
+      return HomePage();
+    }
+    return LoginScreen();
+  }
+}*/

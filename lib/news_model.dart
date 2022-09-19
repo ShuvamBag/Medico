@@ -1,11 +1,12 @@
 class NewsApiModel {
-  String title, imageUrl, content, description;
+  String title, description, content, imageUrl;
 
-  NewsApiModel(
-      {required this.title,
-        required this.description,
-        required this.content,
-        required this.imageUrl});
+  NewsApiModel({
+    required this.title,
+    required this.description,
+    required this.content,
+    required this.imageUrl,
+  });
 
   factory NewsApiModel.fromJson(Map<String, dynamic> jsonData) {
     return NewsApiModel(
