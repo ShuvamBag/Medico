@@ -248,6 +248,9 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      SizedBox(
+                        width: 10,
+                      ),
                       Image.asset(
                         "assets/water_bottle.png",
                         height: 100,
@@ -258,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Container(
                         margin: EdgeInsets.symmetric(),
-                        width: 200,
+                        width: 190,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

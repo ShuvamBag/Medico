@@ -17,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginPageState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  var loginfail = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +49,15 @@ class _LoginPageState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: Image.asset("assets/login.gif"),
-                  ),
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: TextField(
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Image.asset("assets/login.gif"),
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: TextField(
                     style: GoogleFonts.poppins(
                       fontSize: 20,
                     ),
@@ -68,6 +69,7 @@ class _LoginPageState extends State<LoginScreen> {
                         fillColor: HexColor("#BCC6F9"),
                         prefixIcon: Icon(Icons.person),
                         hintText: "Email Address",
+                        errorText: loginfail ? 'Check your Credentials' : null,
                         border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(30)),
@@ -81,14 +83,14 @@ class _LoginPageState extends State<LoginScreen> {
                             width: 2.0,
                           ),
                         )),
-                      ),
-                    ),
                   ),
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: TextField(
-                        obscureText: true,
+                ),
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  child: TextField(
+                    obscureText: true,
                     style: GoogleFonts.poppins(
                       fontSize: 20,
                     ),
@@ -100,6 +102,7 @@ class _LoginPageState extends State<LoginScreen> {
                         fillColor: HexColor("#E2C2FF"),
                         prefixIcon: Icon(Icons.key),
                         hintText: "Password",
+                        errorText: loginfail ? 'Check your Credential' : null,
                         border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(30)),
@@ -162,6 +165,9 @@ class _LoginPageState extends State<LoginScreen> {
                               MaterialPageRoute(
                                   builder: (context) => navigationbar()));
                         }).onError((error, stackTrace) {
+                          setState(() {
+                            loginfail = true; //loginfail is bool
+                          });
                           print("Error ${error.toString()}");
                         });
                       },
